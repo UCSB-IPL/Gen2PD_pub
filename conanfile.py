@@ -1,11 +1,11 @@
 
 from conans import ConanFile, CMake
 class PdkConan(ConanFile):
-    name = "IPL_pdk_demo"
+    name = "pdk_Xtech"
     version = "0.2"
     license = ""
-    author = "Author name <email>"
-    description = "A PDK development example."
+    author = "Bowen Song"
+    description = "GenII-SiOI_500nmDemo"
     settings = "os", "compiler", "build_type", "arch"
     options = {"shared": [True, False]}
     default_options = "shared=False"
@@ -24,4 +24,4 @@ class PdkConan(ConanFile):
         self.copy("*.plf", dst=".", src=".", keep_path=False)
 
     def package_info(self):
-        self.cpp_info.libs = ["IPL_pdk_demo"] 
+        self.cpp_info.libs = ["pdk_Xtech"] 
