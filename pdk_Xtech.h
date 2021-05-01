@@ -13,11 +13,8 @@
 
 
 DECLARE_NEW_PDK(PDK_Xtech)
-
-
     DECLARE_WAVEGUIDES(
             , waveguide1)
-
     //Declare new component
     DECLARE_NEW_COMPONENT(WG)
 
@@ -31,7 +28,7 @@ DECLARE_NEW_PDK(PDK_Xtech)
     END_DECLARE_NEW_COMPONENT(WG)
 
 
-            //Declare new component
+        //Declare new component
     DECLARE_NEW_COMPONENT(MMI)
 
         //Declare component parameters
@@ -41,6 +38,18 @@ DECLARE_NEW_PDK(PDK_Xtech)
         void layout(int) override;
 
     END_DECLARE_NEW_COMPONENT(MMI)
+
+
+            //Declare new component
+    DECLARE_NEW_COMPONENT(MMItt)
+
+        //Declare component parameters
+
+        //Declare component function
+        MMItt();
+        void layout(int) override;
+
+    END_DECLARE_NEW_COMPONENT(MMItt)
 
     //Declare new component
     DECLARE_NEW_COMPONENT(MZI)

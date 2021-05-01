@@ -81,6 +81,25 @@ IMPLEMENT_NEW_PDK(PDK_Xtech)
         }
         cp = cp1;
     }
+MMItt::MMItt() {
+        SimpleComponent = true;
+        COMPONENT_INIT();
+    }
+
+    void MMItt::layout(int l) {
+        double brancharm1 = 100_um, brancharm2 = 100_um;
+
+        double mmiL = 50_um,  mmiW = 12_um, Sept = 6_um, mmiTpL = 5_um,  taperW = 2_um;
+        NEW(MMI1by2,mmiL,mmiW,Sept,mmiTpL,taperW).place();
+        BLOCK {
+            move(0,Sept,0,NOFLIP);
+        NEW(SINE_BEND, brancharm1, brancharm2).place();
+        }
+        BLOCK {
+        //move(0,Sept,0,NOFLIP);
+        NEW(SINE_BEND, brancharm1, -brancharm2).place();
+        }
+    }
 
     MZI::MZI() {
         SimpleComponent = true;
@@ -114,19 +133,17 @@ IMPLEMENT_NEW_PDK(PDK_Xtech)
     }
     void MMItree::layout(int l) {
 
-         double mmiL = 50_um,  mmiW = 12_um, Sept = 6_um, mmiTpL = 5_um,  taperW = 2_um;
-        double brancharm1 = 100_um, brancharm2 = 100_um;
+        double mmiL = 50_um,  mmiW = 12_um, Sept = 6_um, mmiTpL = 5_um,  taperW = 2_um;
+        double minturn = 120_um;
         add_O_Port("in0", cp, WG_Structure_List["waveguide1"]);
         var MMI1 = NEW(MMI1by2,mmiL,mmiW,Sept,mmiTpL,taperW).place();
     BLOCK{
-        MMI1.O_PORTS["out0"]>> NEW(SINE_BEND, brancharm1, brancharm2);
+        MMI1.O_PORTS["out0"]>> NEW(CW, minturn, -90_deg)>>NEW(SW,brancharm2)>>NEW(CW, minturn, 90_deg);
         add_O_Port("out0", cp, WG_Structure_List["waveguide1"]);
        }
     BLOCK{
-
-        MMI1.O_PORTS["out1"]>> NEW(SINE_BEND, brancharm1, -brancharm2);
+        MMI1.O_PORTS["out1"]>> NEW(CW, minturn, 90_deg)>>NEW(SW,brancharm2)>>NEW(CW, minturn, -90_deg);
         add_O_Port("out1", cp, WG_Structure_List["waveguide1"]);
-
     }
     }
 
