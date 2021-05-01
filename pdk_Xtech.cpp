@@ -108,6 +108,27 @@ IMPLEMENT_NEW_PDK(PDK_Xtech)
         add_O_Port(mmi2.O_PORTS["out2"], "out2");
     }
 
+ MMItree::MMItree(double brancharm1, double brancharm2): brancharm1(brancharm1), brancharm2(brancharm2){
+        SimpleComponent = true;
+        COMPONENT_INIT(brancharm1, brancharm2);
+    }
+    void MMItree::layout(int l) {
+
+         double mmiL = 50_um,  mmiW = 12_um, Sept = 6_um, mmiTpL = 5_um,  taperW = 2_um;
+        double brancharm1 = 100_um, brancharm2 = 100_um;
+        add_O_Port("in0", cp, WG_Structure_List["waveguide1"]);
+        var MMI1 = NEW(MMI1by2,mmiL,mmiW,Sept,mmiTpL,taperW).place();
+    BLOCK{
+        MMI1.O_PORTS["out0"]>> NEW(SINE_BEND, brancharm1, brancharm2);
+        add_O_Port("out0", cp, WG_Structure_List["waveguide1"]);
+       }
+    BLOCK{
+
+        MMI1.O_PORTS["out1"]>> NEW(SINE_BEND, brancharm1, -brancharm2);
+        add_O_Port("out1", cp, WG_Structure_List["waveguide1"]);
+
+    }
+    }
 
     RingTyp1::RingTyp1(double gap, double radius): gap(gap), radius(radius){
         SimpleComponent = true;

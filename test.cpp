@@ -150,15 +150,18 @@ void mask(int i) {
                 >>NEW(SAG_FP,deviceL,deviceW,3_um,laserRidge,contrrolangle);
 
     }
-// 
+        double brancharm1 = 100_um, brancharm2 = 100_um;
+        NEW(MMItree,brancharm1,brancharm2).place();
+        
 
-        double mmiL = 50_um,  mmiW = 12_um, Sept = 6_um, mmiTpL = 5_um,  taperW = 2_um;
+    //     double mmiL = 50_um,  mmiW = 12_um, Sept = 6_um, mmiTpL = 5_um,  taperW = 2_um;
+    //     var MMI1 = NEW(MMI1by2,mmiL,mmiW,Sept,mmiTpL,taperW).place();
+    // //     move(300_um, 100_um, 0, NOFLIP);
+    // //     var MMI2 = NEW(MMI1by2,mmiL,mmiW,Sept,mmiTpL,taperW).place();
+    // //     var MMI2 = NEW(MMI1by2,mmiL,mmiW,Sept,mmiTpL,taperW).place();
 
-        var MMI1 = NEW(MMI1by2,mmiL,mmiW,Sept,mmiTpL,taperW).place();
-        move(300_um, 100_um, 0, NOFLIP);
-        var MMI2 = NEW(MMI1by2,mmiL,mmiW,Sept,mmiTpL,taperW).place();
-
-
-       MMI1.O_PORTS["out0"]>>NEW(CONNECTOR_SINE_BEND)>> MMI2.O_PORTS["in0"];
+    //    MMI1.O_PORTS["out0"]>> NEW(SINE_BEND, brancharm1, brancharm2);
+    //    MMI1.O_PORTS["out1"]>> NEW(SINE_BEND, brancharm1, -brancharm2);
+    // //    MMI1.O_PORTS["out0"]>>NEW(CONNECTOR_SINE_BEND)>> MMI2.O_PORTS["in0"];
 
 }

@@ -23,7 +23,7 @@ set(MASK_NAME "JK_Extension")
 ################
 
 project(${PDK_NAME})
-message(STATUS "Downloading pdk.cmake from https://bintray.com/cmalips/libmask/")
-file(DOWNLOAD "https://bintray.com/cmalips/libmask/download_file?file_path=pdk.cmake"
+message(STATUS "Downloading pdk.cmake ...")
+file(DOWNLOAD "https://raw.githubusercontent.com/yuanliuus/MaskFiles/master/pdk.cmake"
         "${CMAKE_BINARY_DIR}/pdk.cmake")
 include(${CMAKE_BINARY_DIR}/pdk.cmake)
