@@ -147,6 +147,35 @@ MMItt::MMItt() {
     }
     }
 
+
+    
+    MMItree2::MMItree2(double r, int stage,double d): r(r), stage(stage), d(d){
+        SimpleComponent = true;
+        COMPONENT_INIT(r, stage, d);
+    }
+    void  MMItree2::layout(int l) {
+        double mmiL = 50_um,  mmiW = 12_um, Sept = 6_um, mmiTpL = 5_um,  taperW = 2_um;
+
+	    if (!stage) {
+		    NEW(SW,100_um).place();
+	    }
+
+        double dc_d = 0_um;
+        NEW(MMI1by2,mmiL,mmiW,Sept,mmiTpL,taperW).place();
+
+        BLOCK{
+        NEW(SINE_BEND, r,-(-dc_d + d * pow(2, stage - 1)) / 2).place();
+		NEW(MMItree2,d,stage - 1,r).place();
+        }
+        offset(dc_d);
+        BLOCK{
+        NEW(SINE_BEND, r,(-dc_d + d * pow(2, stage - 1)) / 2).place();
+		NEW(MMItree2,d,stage - 1,r).place();
+        }
+    }
+
+
+
     RingTyp1::RingTyp1(double gap, double radius): gap(gap), radius(radius){
         SimpleComponent = true;
         COMPONENT_INIT(gap, radius);

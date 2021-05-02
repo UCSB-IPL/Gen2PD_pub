@@ -106,7 +106,19 @@ DECLARE_NEW_PDK(PDK_Xtech)
 
     END_DECLARE_NEW_COMPONENT(RingTyp1)
     //Declare new component
-    DECLARE_NEW_COMPONENT(MMItree)
+    DECLARE_NEW_COMPONENT(MMItree2)
+
+        //Declare component parameters
+        double d, r;
+        int stage;
+
+        //Declare component function
+        explicit MMItree2(double, int, double);
+        void layout(int) override;
+
+    END_DECLARE_NEW_COMPONENT(MMItree2)
+
+        DECLARE_NEW_COMPONENT(MMItree)
 
         //Declare component parameters
         double brancharm1, brancharm2;

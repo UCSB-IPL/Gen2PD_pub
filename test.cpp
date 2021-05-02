@@ -154,7 +154,7 @@ void mask(int i) {
         double mmiL = 50_um,  mmiW = 12_um, Sept = 6_um, mmiTpL = 5_um, taperW = 2_um;
 
 
-
+        NEW(MMItree2,100_um,3,100_um).place();
 
 
         // var stage11  = NEW(MMItree,brancharm1,16*brancharm2).place();
