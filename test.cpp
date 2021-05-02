@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
 
 void mask(int i) {
 
-    double DieL =20000_um, DieW = 10000_um;
+    double DieL =10000_um, DieW = 20000_um;
     double shiftx = 200_um, shifty = 90_um, stepperfine = 200e-6;
 
     BLOCK {
@@ -154,7 +154,7 @@ void mask(int i) {
         double mmiL = 50_um,  mmiW = 12_um, Sept = 6_um, mmiTpL = 5_um, taperW = 2_um;
 
 
-        NEW(MMItree2,100_um,3,100_um).place();
+        NEW(MMItree2,165_um,4,165_um).place();
 
 
         // var stage11  = NEW(MMItree,brancharm1,16*brancharm2).place();
@@ -185,36 +185,7 @@ void mask(int i) {
         // NEW(SINE_BEND, brancharm1, -brancharm2).place();
         //  NEW(MMItree,brancharm1,brancharm2).place();
         // }
-        // var stage21  = NEW(MMItree,brancharm1,brancharm2);
-        // var stage22  = NEW(MMItree,brancharm1,brancharm2);
-        // var stage23  = NEW(MMItree,brancharm1,brancharm2);
-        // var stage24  = NEW(MMItree,brancharm1,brancharm2);
-
-        // var stage31  = NEW(MMItree,brancharm1,brancharm2);
-        // var stage32  = NEW(MMItree,brancharm1,brancharm2);
-        // var stage33  = NEW(MMItree,brancharm1,brancharm2);
-        // var stage34  = NEW(MMItree,brancharm1,brancharm2);
-        // var stage35  = NEW(MMItree,brancharm1,brancharm2);
-        // var stage36  = NEW(MMItree,brancharm1,brancharm2);
-        // var stage37  = NEW(MMItree,brancharm1,brancharm2);
-        // var stage38  = NEW(MMItree,brancharm1,brancharm2);
-        
-        // var stage41  = NEW(MMItree,brancharm1,brancharm2);
-        // var stage42  = NEW(MMItree,brancharm1,brancharm2);
-        // var stage43  = NEW(MMItree,brancharm1,brancharm2);
-        // var stage44  = NEW(MMItree,brancharm1,brancharm2);
-        // var stage45  = NEW(MMItree,brancharm1,brancharm2);
-        // var stage46  = NEW(MMItree,brancharm1,brancharm2);
-        // var stage47  = NEW(MMItree,brancharm1,brancharm2);
-        // var stage48  = NEW(MMItree,brancharm1,brancharm2);
-        // var stage49  = NEW(MMItree,brancharm1,brancharm2);
-        // var stage410  = NEW(MMItree,brancharm1,brancharm2);
-        // var stage411  = NEW(MMItree,brancharm1,brancharm2);
-        // var stage412  = NEW(MMItree,brancharm1,brancharm2);
-        // var stage413  = NEW(MMItree,brancharm1,brancharm2);
-        // var stage414  = NEW(MMItree,brancharm1,brancharm2);
-        // var stage415  = NEW(MMItree,brancharm1,brancharm2);
-        // var stage416  = NEW(MMItree,brancharm1,brancharm2);
+        // var sta= NEW(MMItree,brancharm1,brancharm2);
 
         // NEW(MMI1by2,mmiL,mmiW,Sept,mmiTpL,taperW).place();
         // BLOCK {

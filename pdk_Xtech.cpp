@@ -93,11 +93,11 @@ MMItt::MMItt() {
         NEW(MMI1by2,mmiL,mmiW,Sept,mmiTpL,taperW).place();
         BLOCK {
             move(0,Sept,0,NOFLIP);
-        NEW(SINE_BEND, brancharm1, brancharm2).place();
+            NEW(SINE_BEND, brancharm1, brancharm2).place();
         }
         BLOCK {
-        //move(0,Sept,0,NOFLIP);
-        NEW(SINE_BEND, brancharm1, -brancharm2).place();
+            //move(0,Sept,0,NOFLIP);
+            NEW(SINE_BEND, brancharm1, -brancharm2).place();
         }
     }
 
@@ -157,19 +157,23 @@ MMItt::MMItt() {
         double mmiL = 50_um,  mmiW = 12_um, Sept = 6_um, mmiTpL = 5_um,  taperW = 2_um;
 
 	    if (!stage) {
-		    NEW(SW,100_um).place();
+		    // NEW(SW,100_um).place();
+            // return 0;
+            return;
 	    }
 
         double dc_d = 0_um;
         NEW(MMI1by2,mmiL,mmiW,Sept,mmiTpL,taperW).place();
 
         BLOCK{
-        NEW(SINE_BEND, r,-(-dc_d + d * pow(2, stage - 1)) / 2).place();
-		NEW(MMItree2,d,stage - 1,r).place();
+        move(0_um,Sept,0,NOFLIP);
+        NEW(SINE_BEND, r+300_um*(stage - 1),(-dc_d + d * pow(2, stage - 1)) / 2).place();
+        NEW(MMItree2,d,stage - 1,r).place();
         }
-        offset(dc_d);
+        // offset(dc_d);
         BLOCK{
-        NEW(SINE_BEND, r,(-dc_d + d * pow(2, stage - 1)) / 2).place();
+        move(0_um,0,0,NOFLIP);
+        NEW(SINE_BEND,  r+300_um*(stage - 1),-(-dc_d + d * pow(2, stage - 1)) / 2).place();
 		NEW(MMItree2,d,stage - 1,r).place();
         }
     }
