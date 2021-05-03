@@ -175,6 +175,7 @@ MMItt::MMItt() {
         move(0_um,0,0,NOFLIP);
         NEW(SINE_BEND,  r+300_um*(stage - 1),-(-dc_d + d * pow(2, stage - 1)) / 2).place();
 		NEW(MMItree2,d,stage - 1,r).place();
+        add_O_Port("out", cp, WG_Structure_List["waveguide1"]);
         }
     }
 

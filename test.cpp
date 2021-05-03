@@ -154,7 +154,18 @@ void mask(int i) {
         double mmiL = 50_um,  mmiW = 12_um, Sept = 6_um, mmiTpL = 5_um, taperW = 2_um;
 
 
-        NEW(MMItree2,165_um,4,165_um).place();
+move(xstart,Ystart+8*ydelta,0,NOFLIP);
+        NEW(MMItree2,165_um,6,165_um).place();
+
+
+var cha1 = NEW(SW,1000_um).place();
+BLOCK{
+
+    }
+BLOCK{
+move(0,165_um,0,NOFLIP);
+var cha2 = `NEW(SW,1000_um).place();
+}
 
 
         // var stage11  = NEW(MMItree,brancharm1,16*brancharm2).place();
@@ -164,7 +175,7 @@ void mask(int i) {
         // stage11.O_PORTS["out0"]>>stage22.O_PORTS["in0"];
         // NEW(MMItt).place();
         // BLOCK {
-        //     move(0,Sept,0,NOFLIP);
+        //     
         //          NEW(SINE_BEND, brancharm1, brancharm2).place();
         //          NEW(MMItt).place();
         // }
