@@ -164,7 +164,7 @@ BLOCK{
     }
 BLOCK{
 move(0,165_um,0,NOFLIP);
-var cha2 = `NEW(SW,1000_um).place();
+var cha2 = NEW(SW,1000_um).place();
 }
 
 
