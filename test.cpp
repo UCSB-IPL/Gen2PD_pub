@@ -158,9 +158,9 @@ move(xstart,0,0,NOFLIP);
         NEW(MMItree2,127_um,7,127_um).place();
 
 
-for(int i = 1;i<10;i++)
+for(int i = 0;i<128;i++)
 {
- offset(0-127_um*(i-1));
+ 
  BLOCK{
     adiabend(120_um, 14_deg, 1_um, 100);
     taper(50_um,1_um,6_um);
@@ -176,7 +176,6 @@ for(int i = 1;i<10;i++)
                 >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
                 >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
                 >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                       >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
                 >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
                 >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
                 >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
@@ -186,7 +185,8 @@ for(int i = 1;i<10;i++)
                 >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
                 >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
                 >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                       >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
                 >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
                 >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
                 >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
@@ -197,6 +197,7 @@ for(int i = 1;i<10;i++)
                 >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
                 >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle);
     }
+    offset(-127_um);
 }
 
 // BLOCK{

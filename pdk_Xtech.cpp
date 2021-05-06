@@ -167,7 +167,7 @@ MMItt::MMItt() {
 
         BLOCK{
         move(0_um,Sept,0,NOFLIP);
-        NEW(SINE_BEND, r+300_um*(stage - 1),(-dc_d + d * pow(2, stage - 1)) / 2).place();
+        NEW(SINE_BEND, r+300_um*(stage - 1),(d * pow(2, stage - 1)) / 2-Sept/2).place();
         NEW(MMItree2,d,stage - 1,r).place();
         add_O_Port("out0", cp, WG_Structure_List["waveguide1"]);
 
@@ -175,7 +175,7 @@ MMItt::MMItt() {
         // offset(dc_d);
         BLOCK{
         move(0_um,0,0,NOFLIP);
-        NEW(SINE_BEND,  r+300_um*(stage - 1),-(-dc_d + d * pow(2, stage - 1)) / 2).place();
+        NEW(SINE_BEND,  r+300_um*(stage - 1),-(d * pow(2, stage - 1)) / 2+Sept/2).place();
 		NEW(MMItree2,d,stage - 1,r).place();
         add_O_Port("out1", cp, WG_Structure_List["waveguide1"]);
         // move(0_um,(-dc_d + d * pow(2, stage - 1)) / 2,0,NOFLIP);
@@ -1889,7 +1889,7 @@ MMItt::MMItt() {
             sw(deviceL,deviceW);
             add_O_Port("out0", cp, WG_Structure_List["waveguide1"]);
 
-            if(contrrolangle){
+            if(1){
         lno = tan(RAD(thedta))*deviceW;
         move(0,-deviceW/2,0,NOFLIP);
         triangle(lno,deviceW,0,deviceW);
