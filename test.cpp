@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
 
 void mask(int i) {
 
-    double DieL =10000_um, DieW = 20000_um;
+    double DieL =22000_um, DieW = 22000_um;
     double shiftx = 200_um, shifty = 90_um, stepperfine = 200e-6;
 
     BLOCK {
@@ -124,8 +124,8 @@ void mask(int i) {
     double SOIwaveguideWidth  = 1_um;
 
     ///////////////////////////device intinalzition///////////////////////////
-        deviceL = 125_um;
-        deviceW = 15_um;
+        deviceL = 250_um;
+        deviceW = 25_um;
         laserRidge = 3_um;
         nanogap = 0;
     ///////////////////////////device intinalzition///////////////////////////
@@ -154,20 +154,62 @@ void mask(int i) {
         double mmiL = 50_um,  mmiW = 12_um, Sept = 6_um, mmiTpL = 5_um, taperW = 2_um;
 
 
-move(xstart,Ystart+8*ydelta,0,NOFLIP);
-        NEW(MMItree2,165_um,6,165_um).place();
+move(xstart,0,0,NOFLIP);
+        NEW(MMItree2,127_um,7,127_um).place();
 
 
-var cha1 = NEW(SW,1000_um).place();
-BLOCK{
-
+for(int i = 1;i<10;i++)
+{
+ offset(0-127_um*(i-1));
+ BLOCK{
+    adiabend(120_um, 14_deg, 1_um, 100);
+    taper(50_um,1_um,6_um);
+    move(-1_um,0,14_deg,NOFLIP);
+    NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place().O_PORTS["out0"]
+                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+                       >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+                       >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle);
     }
-BLOCK{
-move(0,165_um,0,NOFLIP);
-var cha2 = NEW(SW,1000_um).place();
 }
 
+// BLOCK{
+// move(0,165_um,0,NOFLIP);
+// var cha2 = NEW(SW,1000_um).place();
+// }
 
+// move(xstart,Ystart+8*ydelta-10000_um,0,NOFLIP);
+//         NEW(MMI1by2,mmiL,mmiW,Sept,mmiTpL,taperW).place();
+//         BLOCK {
+            
+//                  NEW(SINE_BEND, brancharm1, brancharm2).place();
+//         }
         // var stage11  = NEW(MMItree,brancharm1,16*brancharm2).place();
         // var stage21  = NEW(MMItree,brancharm1,8*brancharm2);
         // var stage22  = NEW(MMItree,brancharm1,8*brancharm2);

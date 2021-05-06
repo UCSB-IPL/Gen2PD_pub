@@ -13,7 +13,7 @@ IMPLEMENT_NEW_PDK(PDK_Xtech)
 
     DEFINE_WG_STRUCTURES
             {"waveguide1", {5_um, TYPE_O_PORT, {
-                        {layernr(L_waveguides), 0.5_um}, {layernr(L_contactlayer),2_um}
+                        {layernr(L_waveguides), 1_um}, {layernr(L_contactlayer),2_um}
                 }
                 }
             },
@@ -1872,11 +1872,18 @@ MMItt::MMItt() {
     void SAG_FP::layout(int l) {
 
         double ridgeshift = 0,laserTaper = 0_um, laserout = 2_um, lasertaperout = 2_um, pcontact = 0.6, pvia =0.7, nholegap = 1_um, nviagap = 0.15_um;
-        double padwidth = 40_um, padgap = 15_um, nmetalmiddle = 30_um, nmetalmiddlegap = 3_um, thedta = 20,lno = 0;
+        double padwidth = 40_um, padgap = 15_um, nmetalmiddle = 30_um, nmetalmiddlegap = 3_um, thedta = 7,lno = 0;
 
 
         BLOCK{
             add_O_Port("in0", cp, WG_Structure_List["waveguide1"]);
+
+            BLOCK{
+
+        lno = tan(RAD(thedta))*deviceW;
+        move(0,-deviceW/2,0,NOFLIP);
+        triangle(-lno,deviceW,0,deviceW);
+        }
             layer(L_waveguides);
             move(0,0,0,NOFLIP);
             sw(deviceL,deviceW);
