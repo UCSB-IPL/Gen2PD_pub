@@ -232,9 +232,31 @@ for(int i = 0;i<6;i++)
     adiabend(120_um, degreee, 1_um, 100);
     }
 }
+offset(165_um);
 
+BLOCK{
+deviceL = 1000_um;
+NEW(SW,100_um).place();
+inputaper = 70_um;
+
+    adiabend(120_um, degreee, 1_um, 100);
+    taper(inputaper,1_um,6_um);
+    move(-1_um,0,13.6_deg,NOFLIP);
+    NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place();
+    move(-1_um,0,degreee,NOFLIP);
+    taper(inputaper,6_um,1_um);
+    adiabend(120_um, degreee, 1_um, 100);
+
+    adiabend(120_um, degreee, 1_um, 100);
+    taper(inputaper,1_um,6_um);
+    move(-1_um,0,13.6_deg,NOFLIP);
+    NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place();
+    move(-1_um,0,degreee,NOFLIP);
+    taper(inputaper,6_um,1_um);
+    adiabend(120_um, degreee, 1_um, 100);
+    
+}
 offset(262_um);
-
 BLOCK{
 move(-100_um,0,0,NOFLIP);
 NEW(SW,100_um).place();
@@ -253,12 +275,15 @@ NEW(MMItree2,200_um,1,175_um).place();
     move(-1_um,0,14_deg,NOFLIP);
     taper(inputaper,6_um,1_um);
     adiabend(120_um, 14_deg, 1_um, 100);
+    NEW(SINE_BEND, 200_um,175_um/2-Sept/2).place();
+    offset(-Sept/2);
+    NEW(MMI2by1,mmiL,mmiW,Sept,mmiTpL,taperW).place();
     }
-    
     offset(-175_um);
-    // BLOCK{
-    //     NEW(SW,1000_um).place();
+    //BLOCK{
+    // NEW(SW,500_um).place();
     // }
+    var mmout = NEW(MMI2by1,mmiL,mmiW,Sept,mmiTpL,taperW);
  BLOCK{
     adiabend(120_um, 14_deg, 1_um, 100);
     taper(inputaper,1_um,6_um);
@@ -267,8 +292,8 @@ NEW(MMItree2,200_um,1,175_um).place();
     move(-1_um,0,14_deg,NOFLIP);
     taper(inputaper,6_um,1_um);
     adiabend(120_um, 14_deg, 1_um, 100);
+    NEW(SINE_BEND, 200_um,-175_um/2+Sept/2).place();
     }
-
     }
 }
 
@@ -290,7 +315,6 @@ for(int i = 0;i<2;i++)
     }
     offset(-250_um);
 }
-
 
 move(1500_um,-500_um,0,NOFLIP);
 NEW(SW,100_um).place();
@@ -322,6 +346,7 @@ NEW(MMItree2,700_um,1,250_um).place();
     move(-1_um,0,14_deg,NOFLIP);
     taper(inputaper,6_um,1_um);
     adiabend(120_um, 14_deg, 1_um, 100);
+
     }
 
 

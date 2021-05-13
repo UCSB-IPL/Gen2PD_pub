@@ -29,6 +29,17 @@ DECLARE_NEW_PDK(PDK_Xtech)
 
 
         //Declare new component
+    DECLARE_NEW_COMPONENT(MMI2end)
+
+        //Declare component parameters
+
+        //Declare component function
+        MMI2end();
+        void layout(int) override;
+
+    END_DECLARE_NEW_COMPONENT(MMI2end)
+
+        //Declare new component
     DECLARE_NEW_COMPONENT(MMI)
 
         //Declare component parameters
@@ -327,7 +338,18 @@ DECLARE_NEW_PDK(PDK_Xtech)
         ComponentBase & Connector_Component(PortBase &, PortBase &) override;
     END_DECLARE_NEW_COMPONENT(CONNECTOR_SINE_BEND_EBEAM)
 
+    //Declare new component
+    DECLARE_NEW_COMPONENT(MMI2by1)
 
+        //Declare component parameters
+        double mmiL, mmiW, Sept, mmiTpL, taperW;
+        //Declare component function
+        explicit MMI2by1(double,double,double,double,double);
+
+        void layout(int) override;
+
+    END_DECLARE_NEW_COMPONENT(MMI2by1)
+     
     //Declare new component
     DECLARE_NEW_COMPONENT(MMI1by2)
 

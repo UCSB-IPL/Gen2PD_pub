@@ -33,6 +33,15 @@ IMPLEMENT_NEW_PDK(PDK_Xtech)
     IMPLEMENT_WAVEGUIDES(, waveguide1);
 
 
+    MMI2end::MMI2end() {
+        SimpleComponent = true;
+        COMPONENT_INIT();
+    }
+
+    void MMI2end::layout(int l) {
+
+       
+    }
 
 
     MMI::MMI() {
@@ -1409,11 +1418,9 @@ MMItt::MMItt() {
         SimpleComponent = true;
         COMPONENT_INIT (mmiL, mmiW, Sept, mmiTpL, taperW);
     }
-
-
+    
     void MMI1by2::layout(int l) {
-        double wg = 0.5_um;
-
+        double wg = 1_um;
 
         BLOCK {
             layer(L_contactlayer);
@@ -1430,28 +1437,23 @@ MMItt::MMItt() {
             move(0, Sept/2, 0,NOFLIP);
             taper(mmiTpL,taperW,wg);
             add_O_Port("out0", cp, WG_Structure_List["waveguide1"]);
-
         };
 
         BLOCK{
             move(0, -Sept/2, 0,NOFLIP);
             taper(mmiTpL,taperW,wg);
             add_O_Port("out1", cp, WG_Structure_List["waveguide1"]);
-
         };
 
     }
 
-
-    MMI2by2::MMI2by2(double mmiL, double mmiW, double Sept, double mmiTpL, double taperW): mmiL(mmiL), mmiW(mmiW), Sept(Sept), mmiTpL(mmiTpL), taperW(taperW){
+ MMI2by1::MMI2by1(double mmiL, double mmiW, double Sept, double mmiTpL, double taperW): mmiL(mmiL), mmiW(mmiW), Sept(Sept), mmiTpL(mmiTpL), taperW(taperW){
         SimpleComponent = true;
         COMPONENT_INIT (mmiL, mmiW, Sept, mmiTpL, taperW);
     }
-
-
-    void MMI2by2::layout(int l) {
-        double wg = 0.5_um;
-
+    
+    void MMI2by1::layout(int l) {
+        double wg = 1_um;
 
         BLOCK {
             layer(L_contactlayer);
@@ -1460,7 +1462,39 @@ MMItt::MMItt() {
             sw(2*mmiTpL+mmiL+2*offsssee, 5*mmiW);
         }
 
+        BLOCK{
+            move(0, Sept/2, 0,NOFLIP);
+            add_O_Port("in0", cp, WG_Structure_List["waveguide1"]);
+            taper(mmiTpL,wg,taperW);
+        };
 
+        BLOCK{
+            move(0, -Sept/2, 0,NOFLIP);
+            add_O_Port("in1", cp, WG_Structure_List["waveguide1"]);
+            taper(mmiTpL,wg,taperW);
+        };
+
+        BLOCK{
+            move(mmiTpL, 0, 0,NOFLIP);
+            sw(mmiL,mmiW);        
+            taper(mmiTpL,taperW,wg);
+            add_O_Port("out0", cp, WG_Structure_List["waveguide1"]);
+        };
+
+    }
+
+    MMI2by2::MMI2by2(double mmiL, double mmiW, double Sept, double mmiTpL, double taperW): mmiL(mmiL), mmiW(mmiW), Sept(Sept), mmiTpL(mmiTpL), taperW(taperW){
+        SimpleComponent = true;
+        COMPONENT_INIT (mmiL, mmiW, Sept, mmiTpL, taperW);
+    }
+    void MMI2by2::layout(int l) {
+        double wg = 0.5_um;
+        BLOCK {
+            layer(L_contactlayer);
+            double offsssee = 20_um;
+            skip(-offsssee);
+            sw(2*mmiTpL+mmiL+2*offsssee, 5*mmiW);
+        }
         BLOCK {
             move(0, -Sept/2, 0,NOFLIP);
             add_O_Port("in0", cp, WG_Structure_List["waveguide1"]);
@@ -1862,7 +1896,6 @@ MMItt::MMItt() {
         };
 
     }
-
 
     SAG_FP::SAG_FP(double deviceL, double deviceW, double nanogap, double laserRidge,double contrrolangle): deviceL(deviceL),deviceW(deviceW),nanogap(nanogap),laserRidge(laserRidge),contrrolangle(contrrolangle){
         SimpleComponent = true;
