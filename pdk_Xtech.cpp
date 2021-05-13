@@ -1879,17 +1879,19 @@ MMItt::MMItt() {
             add_O_Port("in0", cp, WG_Structure_List["waveguide1"]);
 
             BLOCK{
+                layer(L_Waveguides);
 
         lno = tan(RAD(thedta))*deviceW;
         move(0,-deviceW/2,0,NOFLIP);
         triangle(-lno,deviceW,0,deviceW);
         }
-            layer(L_waveguides);
+            layer(L_Waveguides);
             move(0,0,0,NOFLIP);
             sw(deviceL,deviceW);
             add_O_Port("out0", cp, WG_Structure_List["waveguide1"]);
 
             if(1){
+                layer(L_Waveguides);
         lno = tan(RAD(thedta))*deviceW;
         move(0,-deviceW/2,0,NOFLIP);
         triangle(lno,deviceW,0,deviceW);

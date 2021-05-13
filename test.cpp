@@ -124,7 +124,7 @@ void mask(int i) {
     double SOIwaveguideWidth  = 1_um;
 
     ///////////////////////////device intinalzition///////////////////////////
-        deviceL = 250_um;
+        deviceL = 500_um;
         deviceW = 25_um;
         laserRidge = 3_um;
         nanogap = 0;
@@ -160,19 +160,18 @@ move(xstart,Ystart,0,NOFLIP);
 
 
 
- offset(250_um);
+offset(250_um);
+
+deviceL = 750_um;
 
 BLOCK{
 NEW(SW,100_um).place();
-
 inputaper = 70_um;
-
-for(int i = 0;i<8;i++)
+for(int i = 0;i<7;i++)
     {
     adiabend(120_um, degreee, 1_um, 100);
     taper(inputaper,1_um,6_um);
     move(-1_um,0,13.6_deg,NOFLIP);
-    deviceL = 500_um;
     NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place();
     move(-1_um,0,degreee,NOFLIP);
     taper(inputaper,6_um,1_um);
@@ -180,8 +179,100 @@ for(int i = 0;i<8;i++)
     }
 }
 
-move(0,3000_um,0,NOFLIP);
 
+offset(165_um);
+
+BLOCK{
+deviceL = 750_um;
+NEW(SW,100_um).place();
+inputaper = 70_um;
+for(int i = 0;i<7;i++)
+    {
+    adiabend(120_um, degreee, 1_um, 100);
+    taper(inputaper,1_um,6_um);
+    move(-1_um,0,13.6_deg,NOFLIP);
+    NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place();
+    move(-1_um,0,degreee,NOFLIP);
+    taper(inputaper,6_um,1_um);
+    adiabend(120_um, degreee, 1_um, 100);
+    }
+}
+
+offset(165_um);
+
+BLOCK{
+deviceL = 1000_um;
+NEW(SW,100_um).place();
+inputaper = 70_um;
+for(int i = 0;i<6;i++)
+    {
+    adiabend(120_um, degreee, 1_um, 100);
+    taper(inputaper,1_um,6_um);
+    move(-1_um,0,13.6_deg,NOFLIP);
+    NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place();
+    move(-1_um,0,degreee,NOFLIP);
+    taper(inputaper,6_um,1_um);
+    adiabend(120_um, degreee, 1_um, 100);
+    }
+}
+offset(165_um);
+
+BLOCK{
+deviceL = 1000_um;
+NEW(SW,100_um).place();
+inputaper = 70_um;
+for(int i = 0;i<6;i++)
+    {
+    adiabend(120_um, degreee, 1_um, 100);
+    taper(inputaper,1_um,6_um);
+    move(-1_um,0,13.6_deg,NOFLIP);
+    NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place();
+    move(-1_um,0,degreee,NOFLIP);
+    taper(inputaper,6_um,1_um);
+    adiabend(120_um, degreee, 1_um, 100);
+    }
+}
+
+offset(262_um);
+
+BLOCK{
+move(-100_um,0,0,NOFLIP);
+NEW(SW,100_um).place();
+inputaper = 70_um;
+deviceL = 250_um;
+for(int i = 0;i<1;i++)
+    {
+NEW(SW,50_um).place();
+NEW(MMItree2,200_um,1,175_um).place();
+
+ BLOCK{
+    adiabend(120_um, 14_deg, 1_um, 100);
+    taper(inputaper,1_um,6_um);
+    move(-1_um,0,14_deg,NOFLIP);
+    NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place();
+    move(-1_um,0,14_deg,NOFLIP);
+    taper(inputaper,6_um,1_um);
+    adiabend(120_um, 14_deg, 1_um, 100);
+    }
+    
+    offset(-175_um);
+    // BLOCK{
+    //     NEW(SW,1000_um).place();
+    // }
+ BLOCK{
+    adiabend(120_um, 14_deg, 1_um, 100);
+    taper(inputaper,1_um,6_um);
+    move(-1_um,0,14_deg,NOFLIP);
+    NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place();
+    move(-1_um,0,14_deg,NOFLIP);
+    taper(inputaper,6_um,1_um);
+    adiabend(120_um, 14_deg, 1_um, 100);
+    }
+
+    }
+}
+
+move(0,3000_um,0,NOFLIP);
 NEW(SW,100_um).place();
 NEW(MMItree2,250_um,1,250_um).place();
 for(int i = 0;i<2;i++)
@@ -202,7 +293,6 @@ for(int i = 0;i<2;i++)
 
 
 move(1500_um,-500_um,0,NOFLIP);
-
 NEW(SW,100_um).place();
 NEW(MMItree2,700_um,1,250_um).place();
 
