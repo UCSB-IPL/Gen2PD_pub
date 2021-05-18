@@ -346,7 +346,6 @@ NEW(MMItree2,700_um,1,250_um).place();
     move(-1_um,0,14_deg,NOFLIP);
     taper(inputaper,6_um,1_um);
     adiabend(120_um, 14_deg, 1_um, 100);
-
     }
 
 
