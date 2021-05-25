@@ -31,7 +31,7 @@ int main(int argc, char **argv) {
 
 void mask(int i) {
 
-    double DieL =7000_um, DieW = 7000_um;
+    double DieL =7000_um, DieW = 3500_um;
     double shiftx = 200_um, shifty = 90_um, stepperfine = 200e-6;
 
     BLOCK {
@@ -46,7 +46,6 @@ void mask(int i) {
         NEW(STEPPER_2).place();
         skip(stepperfine);
         NEW(EBL_LOCAL_MARK_TEMP, 100_um, 100_um, 1).place();
-   
 
         org(-DieL / 2 + 4 * shiftx, DieW / 2 - shifty, 0, 0);
         NEW(STEPPER_1).place();
@@ -54,12 +53,7 @@ void mask(int i) {
         NEW(STEPPER_2).place();
         skip(stepperfine);
         NEW(EBL_LOCAL_MARK_TEMP, 100_um, 100_um, 0).place();
-        skip(stepperfine);
-        NEW(STEPPER_1).place();
-        skip(stepperfine);
-        NEW(STEPPER_2).place();
 
-        
         org(DieL / 2 - shiftx, DieW / 2 - shifty, 0, 0);
         NEW(STEPPER_1).place();
         skip(-stepperfine);
@@ -73,11 +67,6 @@ void mask(int i) {
         NEW(STEPPER_2).place();
         skip(-stepperfine);
         NEW(EBL_LOCAL_MARK_TEMP, 100_um, 100_um, 0).place();
-                skip(-stepperfine);
-        NEW(STEPPER_1).place(); 
-        skip(-stepperfine);
-        NEW(STEPPER_2).place();
-        
 
         org(-DieL / 2 + shiftx, -DieW / 2 + shifty, 0, 0);
         NEW(STEPPER_1).place();
@@ -92,10 +81,6 @@ void mask(int i) {
         NEW(STEPPER_2).place();
         skip(stepperfine);
         NEW(EBL_LOCAL_MARK_TEMP, 100_um, 100_um, 0).place();
-        skip(stepperfine);
-        NEW(STEPPER_1).place();
-        skip(stepperfine);
-        NEW(STEPPER_2).place();
 
         org(DieL / 2 - shiftx, -DieW / 2 + shifty, 0, 0);
         NEW(STEPPER_1).place();
@@ -104,18 +89,13 @@ void mask(int i) {
         skip(-stepperfine);
         NEW(EBL_LOCAL_MARK_TEMP, 100_um, 100_um, 1).place();
 
-
         org(DieL / 2 - 4 * shiftx, -DieW / 2 + shifty, 0, 0);
-        
         NEW(STEPPER_1).place();
         skip(-stepperfine);
         NEW(STEPPER_2).place();
         skip(-stepperfine);
         NEW(EBL_LOCAL_MARK_TEMP, 100_um, 100_um, 0).place();
-        skip(-stepperfine);
-        NEW(STEPPER_1).place(); 
-        skip(-stepperfine);
-        NEW(STEPPER_2).place();
+
     };
 
 
@@ -139,483 +119,292 @@ void mask(int i) {
     double contrrolangle = 0;
     double cirw = 10_um,cirr = 40_um, rr = 105_um, arm = 10_um, width = 1_um,gapp = 5_um;
     double P_pad = 10_um, nholew = 40_um, nholerate  = 4,nviarate = 0.8, ncover = 3, ncoverL = 8;
-    double YdeviceGap = 275_um,YdeviceGap2 = 165_um;
-    int everyrow1 = 12,everyrow2 = 20,everyrow = 1;
-    double SOIwaveguideWidth  = 1.5_um;
-
+    double YdeviceGap = 275_um,YdeviceGap2 =165_um;
+    int everyrow1 = 6,everyrow2 = 50,everyrow = 1;
+    double SOIwaveguideWidth  = 1_um;
 
     ///////////////////////////device intinalzition///////////////////////////
-        deviceL = 125_um;
-        deviceW = 15_um;
+        deviceL = 500_um;
+        deviceW = 25_um;
         laserRidge = 3_um;
         nanogap = 0;
-
     ///////////////////////////device intinalzition///////////////////////////
+    // for(int i = 0;i<everyrow2;i++)
+    // {
+    // org(DeviceXorg, -DieW / 2 + 3*shifty+YdeviceGap2*i, 0, NOFLIP);
 
-    for(int i = 0;i<everyrow2;i++)
+    //              NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place().O_PORTS["out0"]
+    //             >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+    //             >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+    //             >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+    //             >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+    //             >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+    //             >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+    //             >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+    //             >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+    //             >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+    //             >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
+    //             >>NEW(SAG_FP,deviceL,deviceW,3_um,laserRidge,contrrolangle);
 
+    // }
+        double brancharm1 = 100_um, brancharm2 = 100_um;
+        double mmiL = 50_um,  mmiW = 12_um, Sept = 6_um, mmiTpL = 5_um, taperW = 2_um;
+
+        double inputaper = 200_um, degreee = 13.6_deg;
+
+
+move(xstart,Ystart,0,NOFLIP);
+
+
+
+offset(250_um);
+
+deviceL = 750_um;
+
+BLOCK{
+NEW(SW,100_um).place();
+inputaper = 100_um;
+for(int i = 0;i<1;i++)
     {
-        if ( i % 2 == 1 )
-        {
-            contrrolangle = 1;
-                    }
+    adiabend(120_um, degreee, 1_um, 100);
+    taper(inputaper,1_um,6_um);
+    move(-1_um,0,13.6_deg,NOFLIP);
+    NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place();
+    move(-1_um,0,degreee,NOFLIP);
+    taper(inputaper,6_um,1_um);
+    adiabend(120_um, degreee, 1_um, 100);
+    adiabend(120_um, -7_deg, 1_um, 100);
+    taper(120_um,1_um,0.15_um);
 
-    org(DeviceXorg, -DieW / 2 + 3*shifty+YdeviceGap2*i, 0, NOFLIP);
-    move(0,0,0,FLIP);
-        NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place().O_PORTS["out0"]
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,3_um,laserRidge,contrrolangle);
-
-
-    if ( i % 2 == 0 )
-        {
-                layer(L_Iwaveguides);
-                move(-5_um,0,RAD(0),NOFLIP);
-                taper(30_um,5_um,SOIwaveguideWidth);
-                move(-5_um,0,RAD(0),NOFLIP);
-                sw(455_um,SOIwaveguideWidth);
-                taper(30_um,SOIwaveguideWidth,5_um);
-                    
-        }
-        
-
-        contrrolangle = 0;
     }
+}
 
-    ///////////////////////////device intinalzition///////////////////////////
-        deviceL = 125_um;
-        deviceW = 25_um;
-        laserRidge = 3_um;
-        nanogap = 0;
-    ///////////////////////////device intinalzition///////////////////////////
+
+offset(165_um);
+
+BLOCK{
+deviceL = 750_um;
+NEW(SW,100_um).place();
+inputaper = 70_um;
+for(int i = 0;i<7;i++)
+    {
+    adiabend(120_um, degreee, 1_um, 100);
+    taper(inputaper,1_um,6_um);
+    move(-1_um,0,13.6_deg,NOFLIP);
+    NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place();
+    move(-1_um,0,degreee,NOFLIP);
+    taper(inputaper,6_um,1_um);
+    adiabend(120_um, degreee, 1_um, 100);
+    }
+}
+
+offset(165_um);
+
+BLOCK{
+deviceL = 1000_um;
+NEW(SW,100_um).place();
+inputaper = 70_um;
+for(int i = 0;i<6;i++)
+    {
+    adiabend(120_um, degreee, 1_um, 100);
+    taper(inputaper,1_um,6_um);
+    move(-1_um,0,13.6_deg,NOFLIP);
+    NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place();
+    move(-1_um,0,degreee,NOFLIP);
+    taper(inputaper,6_um,1_um);
+    adiabend(120_um, degreee, 1_um, 100);
+    }
+}
+offset(165_um);
+
+BLOCK{
+deviceL = 1000_um;
+NEW(SW,100_um).place();
+inputaper = 70_um;
+for(int i = 0;i<6;i++)
+    {
+    adiabend(120_um, degreee, 1_um, 100);
+    taper(inputaper,1_um,6_um);
+    move(-1_um,0,13.6_deg,NOFLIP);
+    NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place();
+    move(-1_um,0,degreee,NOFLIP);
+    taper(inputaper,6_um,1_um);
+    adiabend(120_um, degreee, 1_um, 100);
+    }
+}
+offset(165_um);
+
+BLOCK{
+deviceL = 1000_um;
+NEW(SW,100_um).place();
+inputaper = 70_um;
+
+    adiabend(120_um, degreee, 1_um, 100);
+    taper(inputaper,1_um,6_um);
+    move(-1_um,0,13.6_deg,NOFLIP);
+    NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place();
+    move(-1_um,0,degreee,NOFLIP);
+    taper(inputaper,6_um,1_um);
+    adiabend(120_um, degreee, 1_um, 100);
+
+    adiabend(120_um, degreee, 1_um, 100);
+    taper(inputaper,1_um,6_um);
+    move(-1_um,0,13.6_deg,NOFLIP);
+    NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place();
+    move(-1_um,0,degreee,NOFLIP);
+    taper(inputaper,6_um,1_um);
+    adiabend(120_um, degreee, 1_um, 100);
     
-        for(int i = 0;i<everyrow1;i++){
+}
+offset(262_um);
+BLOCK{
+move(-100_um,0,0,NOFLIP);
+NEW(SW,100_um).place();
+inputaper = 70_um;
+deviceL = 250_um;
+for(int i = 0;i<1;i++)
+    {
+NEW(SW,50_um).place();
+NEW(MMItree2,200_um,1,175_um).place();
 
-            if ( i % 2 == 0 )
-            {
-                contrrolangle = 1;
-            }
-        if ( i % 2 == 1 )
-        {
-            double alingy = 2_um;
-                layer(L_Iwaveguides);
-                move(deviceW/2*tan(RAD(20)),0,0,NOFLIP);
-                move(0,0,RAD(-50),NOFLIP);
-                move(-alingy,0,0,NOFLIP);
-                taper(30_um,3_um,SOIwaveguideWidth);
-                // sw(50_um,SOIwaveguideWidth);
-                adiabend(144.0625_um,RAD(-50),SOIwaveguideWidth,200);
-                sw(605_um,SOIwaveguideWidth);
-                adiabend(120_um,RAD(50),SOIwaveguideWidth,200);
-                adiabend(120_um,RAD(-50),SOIwaveguideWidth,200);
-                taper(30_um,SOIwaveguideWidth,3_um);
-                    
-        }
-
-            org(DeviceXorg, -DieW / 2 + 3*shifty+YdeviceGap*i+YdeviceGap2*everyrow2, 0, FLIP);
-            NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place().O_PORTS["out0"]
-                    >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                    >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                    >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                    >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                    >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                    >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                    >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                    >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                    >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                    >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                    >>NEW(SAG_FP,deviceL,deviceW,3_um,laserRidge,contrrolangle);
-        }
-
-
-
-    ////////////////////////////////////////////////////////
-    DeviceXorg = DeviceXorg+2000_um;
-    ////////////////////////////////////////////////////////
-
-///////////////////////////device intinalzition///////////////////////////
-        deviceL = 125_um;
-        deviceW = 15_um;
-        laserRidge = 3_um;
-        nanogap = 0;
-///////////////////////////device intinalzition///////////////////////////
-
-    for(int i = 0;i<everyrow2;i++){
-
-
-        if ( i % 2 == 1 )
-        {
-            contrrolangle = 1;
-        }
-
-
-        org(DeviceXorg, -DieW / 2 + 3*shifty+YdeviceGap2*i, 0, FLIP);
-        NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place().O_PORTS["out0"]
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,3_um,laserRidge,contrrolangle);
-
-       contrrolangle = 0;
-
+ BLOCK{
+    adiabend(120_um, 14_deg, 1_um, 100);
+    taper(inputaper,1_um,6_um);
+    move(-1_um,0,14_deg,NOFLIP);
+    NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place();
+    move(-1_um,0,14_deg,NOFLIP);
+    taper(inputaper,6_um,1_um);
+    adiabend(120_um, 14_deg, 1_um, 100);
+    NEW(SINE_BEND, 200_um,175_um/2-Sept/2).place();
+    offset(-Sept/2);
+    NEW(MMI2by1,mmiL,mmiW,Sept,mmiTpL,taperW).place();
     }
-
-
-///////////////////////////device intinalzition///////////////////////////
-        deviceL = 125_um;
-        deviceW = 25_um;
-        laserRidge = 3_um;
-        nanogap = 0;
-///////////////////////////device intinalzition///////////////////////////
-
-    for(int i = 0;i<everyrow1;i++){
-
-        if ( i % 2 == 1 )
-        {
-            contrrolangle = 1;
-        }
-
-        org(DeviceXorg, -DieW / 2 + 3*shifty+YdeviceGap*i+YdeviceGap2*everyrow2, 0, FLIP);
-        NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place().O_PORTS["out0"]
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,3_um,laserRidge,contrrolangle);
-        contrrolangle = 0;
-
+    offset(-175_um);
+    //BLOCK{
+    // NEW(SW,500_um).place();
+    // }
+    var mmout = NEW(MMI2by1,mmiL,mmiW,Sept,mmiTpL,taperW);
+ BLOCK{
+    adiabend(120_um, 14_deg, 1_um, 100);
+    taper(inputaper,1_um,6_um);
+    move(-1_um,0,14_deg,NOFLIP);
+    NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place();
+    move(-1_um,0,14_deg,NOFLIP);
+    taper(inputaper,6_um,1_um);
+    adiabend(120_um, 14_deg, 1_um, 100);
+    NEW(SINE_BEND, 200_um,-175_um/2+Sept/2).place();
     }
-
-
-    ////////////////////////////////////////////////////////
-    DeviceXorg = DeviceXorg+700_um;
-    ////////////////////////////////////////////////////////
-
-///////////////////////////device intinalzition///////////////////////////
-        deviceL = 125_um;
-        deviceW = 15_um;
-        laserRidge = 3_um;
-        nanogap = 0;
-///////////////////////////device intinalzition///////////////////////////
-
-    for(int i = 0;i<everyrow2;i++){
-
-        if ( i % 2 == 1 )
-        {
-            contrrolangle = 1;
-        }
-
-        org(DeviceXorg, -DieW / 2 + 3*shifty+YdeviceGap2*i, 0, FLIP);
-        NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place().O_PORTS["out0"]
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,3_um,laserRidge,contrrolangle);
-        contrrolangle = 0;
-
-
     }
+}
 
-
-///////////////////////////device intinalzition///////////////////////////
-        deviceL = 125_um;
-        deviceW = 25_um;
-        laserRidge = 3_um;
-        nanogap = 0;
-///////////////////////////device intinalzition///////////////////////////
-
-    for(int i = 0;i<everyrow1+1;i++){
-
-        if ( i % 2 == 1 )
-        {
-            contrrolangle = 1;
-            
-        }
-        BLOCK{
-
-            
-        //     if ( i % 2 == 0 )
-        // {
-        //     double alingy = 2_um;
-        //         layer(L_Iwaveguides);
-        //         move(deviceW/2*tan(RAD(20)),0,0,NOFLIP);
-        //         move(0,0,RAD(-50),NOFLIP);
-        //         move(-alingy,0,0,NOFLIP);
-        //         taper(30_um,3_um,SOIwaveguideWidth);
-        //         // sw(50_um,SOIwaveguideWidth);
-        //         adiabend(144.0625_um,RAD(-50),SOIwaveguideWidth,200);
-        //         sw(605_um,SOIwaveguideWidth);
-        //         adiabend(120_um,RAD(50),SOIwaveguideWidth,200);
-        //         adiabend(120_um,RAD(-50),SOIwaveguideWidth,200);
-        //          taper(30_um,SOIwaveguideWidth,3_um);
-                    
-        // }
-        }
-
-        org(DeviceXorg, -DieW / 2 + 3*shifty+YdeviceGap*i+YdeviceGap2*everyrow2, 0, FLIP);
-        NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place().O_PORTS["out0"]
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,3_um,laserRidge,contrrolangle);
-        contrrolangle = 0;
-
+move(0,3000_um,0,NOFLIP);
+NEW(SW,100_um).place();
+NEW(MMItree2,250_um,1,250_um).place();
+for(int i = 0;i<2;i++)
+{
+ 
+ BLOCK{
+    adiabend(120_um, 14_deg, 1_um, 100);
+    taper(50_um,1_um,6_um);
+    move(-1_um,0,14_deg,NOFLIP);
+    deviceL = 500_um;
+    NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place();
+    move(-1_um,0,14_deg,NOFLIP);
+    taper(50_um,6_um,1_um);
+    adiabend(120_um, 14_deg, 1_um, 100);
     }
+    offset(-250_um);
+}
 
+move(1500_um,-500_um,0,NOFLIP);
+NEW(SW,100_um).place();
+NEW(MMItree2,700_um,1,250_um).place();
 
-    ////////////////////////////////////////////////////////
-    DeviceXorg = DeviceXorg+700_um;
-    ////////////////////////////////////////////////////////
-
-///////////////////////////device intinalzition///////////////////////////
-         deviceL = 125_um;
-        deviceW = 15_um;
-        laserRidge = 3_um;
-        nanogap = 0;
-///////////////////////////device intinalzition///////////////////////////
-
-    for(int i = 0;i<everyrow2;i++){
-
-        if ( i % 2 == 1 )
-        {
-            contrrolangle = 1;
-        }
-
-        org(DeviceXorg, -DieW / 2 + 3*shifty+YdeviceGap2*i, 0, FLIP);
-        NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place().O_PORTS["out0"]
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,3_um,laserRidge,contrrolangle);
-        contrrolangle = 0;
-
+ BLOCK{
+    adiabend(120_um, 14_deg, 1_um, 100);
+    taper(inputaper,1_um,6_um);
+    move(-1_um,0,14_deg,NOFLIP);
+    deviceL = 500_um;
+    NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place();
+    move(-1_um,0,14_deg,NOFLIP);
+    taper(inputaper,6_um,1_um);
+    adiabend(120_um, 14_deg, 1_um, 100);
     }
+    offset(-250_um);
 
-
-///////////////////////////device intinalzition///////////////////////////
-        deviceL = 125_um;
-        deviceW = 25_um;
-        laserRidge = 3_um;
-        nanogap = 0;
-///////////////////////////device intinalzition///////////////////////////
-
-    for(int i = 0;i<everyrow1;i++){
-
-        if ( i % 2 == 1 )
-        {
-            contrrolangle = 1;
-        }
-
-        org(DeviceXorg, -DieW / 2 + 3*shifty+YdeviceGap*i+YdeviceGap2*everyrow2, 0, FLIP);
-        NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place().O_PORTS["out0"]
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,3_um,laserRidge,contrrolangle);
-        contrrolangle = 0;
-
+     BLOCK{
+        NEW(SW,1000_um).place();
     }
-
-
-  
-    ////////////////////////////////////////////////////////
-    DeviceXorg = DeviceXorg+1100_um;
-    ////////////////////////////////////////////////////////
-
-///////////////////////////device intinalzition///////////////////////////
-        deviceL = 125_um;
-        deviceW = 15_um;
-        laserRidge = 3_um;
-        nanogap = 0;
-///////////////////////////device intinalzition///////////////////////////
-
-    for(int i = 0;i<everyrow2;i++){
-
-        if ( i % 2 == 1 )
-        {
-            contrrolangle = 1;
-        }
-
-
-        org(DeviceXorg, -DieW / 2 + 3*shifty+YdeviceGap2*i, 0, FLIP);
-        NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place().O_PORTS["out0"]
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,3_um,laserRidge,contrrolangle);
-        contrrolangle = 0;
-
-    }
-
-
-///////////////////////////device intinalzition///////////////////////////
-        deviceL = 125_um;
-        deviceW = 25_um;
-        laserRidge = 3_um;
-        nanogap = 0;
-///////////////////////////device intinalzition///////////////////////////
-
-    for(int i = 0;i<everyrow1;i++){
-
-        if ( i % 2 == 1 )
-        {
-            contrrolangle = 1;
-        }
-
-        org(DeviceXorg, -DieW / 2 + 3*shifty+YdeviceGap*i+YdeviceGap2*everyrow2, 0, FLIP);
-        NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place().O_PORTS["out0"]
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,3_um,laserRidge,contrrolangle);
-        contrrolangle = 0;
-
-    }
-
-    ////////////////////////////////////////////////////////
-    DeviceXorg = DeviceXorg+1050_um;
-    ////////////////////////////////////////////////////////
-
-///////////////////////////device intinalzition///////////////////////////
-        deviceL = 125_um;
-        deviceW = 15_um;
-        laserRidge = 3_um;
-        nanogap = 0;
-///////////////////////////device intinalzition///////////////////////////
-
-    for(int i = 0;i<everyrow2;i++){
-        if ( i % 2 == 1 )
-        {
-            contrrolangle = 1;
-        }
-        org(DeviceXorg, -DieW / 2 + 3*shifty+YdeviceGap2*i, 0, FLIP);
-        NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place().O_PORTS["out0"]
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,3_um,laserRidge,contrrolangle);
-        contrrolangle = 0;
-
-    }
-
-
-///////////////////////////device intinalzition///////////////////////////
-        deviceL = 125_um;
-        deviceW = 25_um;
-        laserRidge = 3_um;
-        nanogap = 0;
-///////////////////////////device intinalzition///////////////////////////
-
-    for(int i = 0;i<everyrow1;i++){
-
-        if ( i % 2 == 1 )
-        {
-            contrrolangle = 1;
-        }
-
-        org(DeviceXorg, -DieW / 2 + 3*shifty+YdeviceGap*i+YdeviceGap2*everyrow2, 0, FLIP);
-        NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place().O_PORTS["out0"]
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,3_um,laserRidge,contrrolangle);
-        contrrolangle = 0;
-
-    }
-
-
-
-
-    ////////////////////////////////////////////////////////
-    DeviceXorg = DeviceXorg+800_um;
-    ////////////////////////////////////////////////////////
-
-///////////////////////////device intinalzition///////////////////////////
-        deviceL = 125_um;
-        deviceW = 15_um;
-        laserRidge = 3_um;
-        nanogap = 0;
-///////////////////////////device intinalzition///////////////////////////
-
-    for(int i = 0;i<everyrow2;i++){
-
-        if ( i % 2 == 1 )
-        {
-            contrrolangle = 1;
-        }
-
-        org(DeviceXorg, -DieW / 2 + 3*shifty+YdeviceGap2*i, 0, FLIP);
-        NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place().O_PORTS["out0"]
-                >>NEW(SAG_FP,deviceL,deviceW,3_um,laserRidge,contrrolangle);
-        contrrolangle = 0;
-
-
-    }
-
-
-///////////////////////////device intinalzition///////////////////////////
-        deviceL = 125_um;
-        deviceW = 25_um;
-        laserRidge = 3_um;
-        nanogap = 0;
-///////////////////////////device intinalzition///////////////////////////
-
-    for(int i = 0;i<everyrow1;i++){
-
-
-        org(DeviceXorg, -DieW / 2 + 3*shifty+YdeviceGap*i+YdeviceGap2*everyrow2, 0, FLIP);
-        NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place().O_PORTS["out0"]
-                >>NEW(SAG_FP,deviceL,deviceW,3_um,laserRidge,contrrolangle);
-        contrrolangle = 0;
-
-
-    }
-
 
     BLOCK{
-        org(-DieL / 2, -2.75*shifty , 0, FLIP);
-        deviceW = 100_um;
-        contrrolangle = 0;
-        NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place().O_PORTS["out0"]
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,3_um,laserRidge,contrrolangle);
+    layer(L_contactlayer);
+    adiabend(120_um, 14_deg, 1_um, 100);
+    taper(inputaper,1_um,6_um);
+    move(-1_um,0,14_deg,NOFLIP);
+    deviceL = 500_um;
+    NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place();
+    move(-1_um,0,14_deg,NOFLIP);
+    taper(inputaper,6_um,1_um);
+    adiabend(120_um, 14_deg, 1_um, 100);
     }
 
-        BLOCK{
-        org(-DieL / 2, DieW -5.25*shifty , 0, FLIP);
-        deviceW = 100_um;
-        contrrolangle = 0;
-        NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle).place().O_PORTS["out0"]
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,nanogap,laserRidge,contrrolangle)
-                >>NEW(SAG_FP,deviceL,deviceW,3_um,laserRidge,contrrolangle);
-    }
+
+move(1500_um,-500_um,0,NOFLIP);
+
+
+// BLOCK{
+// move(0,165_um,0,NOFLIP);
+// var cha2 = NEW(SW,1000_um).place();
+// }
+
+// move(xstart,Ystart+8*ydelta-10000_um,0,NOFLIP);
+// NEW(MMI1by2,mmiL,mmiW,Sept,mmiTpL,taperW).place();
+//         BLOCK {
+            
+//                  NEW(SINE_BEND, brancharm1, brancharm2).place();
+// }
+        // var stage11  = NEW(MMItree,brancharm1,16*brancharm2).place();
+        // var stage21  = NEW(MMItree,brancharm1,8*brancharm2);
+        // var stage22  = NEW(MMItree,brancharm1,8*brancharm2);
+        // stage11.O_PORTS["out1"]>>stage21.O_PORTS["in0"];
+        // stage11.O_PORTS["out0"]>>stage22.O_PORTS["in0"];
+        // NEW(MMItt).place();
+        // BLOCK {
+        //     
+        //          NEW(SINE_BEND, brancharm1, brancharm2).place();
+        //          NEW(MMItt).place();
+        // }
+        // BLOCK {
+        //         NEW(SINE_BEND, brancharm1, -brancharm2).place();
+        //         NEW(MMItt).place();
+        // }
+        
+        // NEW(SINE_BEND, brancharm1, brancharm2).place();
+
+        // BLOCK {
+        //     move(0,Sept,0,NOFLIP);
+        // NEW(SINE_BEND, brancharm1, brancharm2).place();
+        //  NEW(MMItree,brancharm1,brancharm2).place();
+        // }
+        // BLOCK {
+        // //move(0,Sept,0,NOFLIP);
+        // NEW(SINE_BEND, brancharm1, -brancharm2).place();
+        //  NEW(MMItree,brancharm1,brancharm2).place();
+        // }
+        // var sta= NEW(MMItree,brancharm1,brancharm2);
+
+        // NEW(MMI1by2,mmiL,mmiW,Sept,mmiTpL,taperW).place();
+        // BLOCK {
+        //     move(0,Sept,0,NOFLIP);
+        // NEW(SINE_BEND, brancharm1, brancharm2).place();
+        // }
+        // BLOCK {
+        // //move(0,Sept,0,NOFLIP);
+        // NEW(SINE_BEND, brancharm1, -brancharm2).place();
+        // }
+
+
+    //    MMI1.O_PORTS["out1"]>> NEW(SINE_BEND, brancharm1, -brancharm2);
+    //    MMI1.O_PORTS["out0"]>>NEW(CONNECTOR_SINE_BEND)>> MMI2.O_PORTS["in0"];
 
 }
